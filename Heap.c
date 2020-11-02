@@ -84,7 +84,27 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 #endif
 
 #if defined BEST && BEST == 0
-   printf("TODO: Implement best fit here\n");
+  size_t hold = NULL;
+  struct _block * final=NULL;
+
+  while(curr)
+  {
+    if(hold == NULL && curr->free)
+    {
+      hold = curr->size;
+      final = curr;
+    }
+    else
+    {
+      if(curr->free && curr->size > size && hold > curr->size)
+      {
+        hold = curr->size;
+        final = curr;
+      }
+    }
+    curr= curr->next;
+  }
+
 #endif
 
 #if defined WORST && WORST == 0
