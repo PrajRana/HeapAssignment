@@ -84,6 +84,7 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 #if defined BEST && BEST == 0
   //holds the size of heap
   size_t hold = NULL;
+  //stores the heap with less leftover bytes 
   struct _block * final=NULL;
 
   while(curr)
@@ -112,7 +113,7 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 #endif
 
 #if defined WORST && WORST == 0
-   printf("TODO: Implement worst fit here\n");
+
 #endif
 
 #if defined NEXT && NEXT == 0
