@@ -109,6 +109,7 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
     }
     curr= curr->next;
   }
+  curr = final;
 
 #endif
 
@@ -130,7 +131,7 @@ while(curr)
   else
   {
     //if its free, heap size is greater or equal to requested size, and
-    //current heap size is smaller than the stored heap size then
+    //current heap size is greater than the stored heap size then
     //store the heap address
     if(curr->free && curr->size >= size && hold < curr->size)
     {
@@ -140,6 +141,7 @@ while(curr)
   }
   curr= curr->next;
 }
+curr = final;
 #endif
 
 #if defined NEXT && NEXT == 0
