@@ -1,5 +1,3 @@
-
-
 #include <assert.h>
 #include <stdio.h>
 #include <stdbool.h>
@@ -84,19 +82,26 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 #endif
 
 #if defined BEST && BEST == 0
+  //holds the size of heap
   size_t hold = NULL;
+  //stores the heap with less leftover bytes
   struct _block * final=NULL;
 
   while(curr)
   {
+    //only executes once in the beginning
     if(hold == NULL && curr->free)
     {
       hold = curr->size;
+      //if first heap is the smallest store it
       final = curr;
     }
     else
     {
-      if(curr->free && curr->size > size && hold > curr->size)
+      //if its free, heap size is greater or equal to requested size, and
+      //current heap size is smaller than the stored heap size then
+      //store the heap address
+      if(curr->free && curr->size >= size && hold > curr->size)
       {
         hold = curr->size;
         final = curr;
@@ -108,7 +113,33 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 #endif
 
 #if defined WORST && WORST == 0
-   printf("TODO: Implement worst fit here\n");
+//holds the size of heap
+size_t hold = NULL;
+//stores the heap with less leftover bytes
+struct _block * final=NULL;
+
+while(curr)
+{
+  //only executes once in the beginning
+  if(hold == NULL && curr->free)
+  {
+    hold = curr->size;
+    //if first heap is the smallest store it
+    final = curr;
+  }
+  else
+  {
+    //if its free, heap size is greater or equal to requested size, and
+    //current heap size is smaller than the stored heap size then
+    //store the heap address
+    if(curr->free && curr->size >= size && hold < curr->size)
+    {
+      hold = curr->size;
+      final = curr;
+    }
+  }
+  curr= curr->next;
+}
 #endif
 
 #if defined NEXT && NEXT == 0
