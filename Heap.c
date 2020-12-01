@@ -91,40 +91,29 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 size_t h=0;
 size_t y=0;
 struct _block *temp = NULL;
-//run this loop when curr is not null
 while(curr)
 {
    *last = curr;
-   //if current block is free and current free block is greater than the allocated size
-   //then execute this condition
    if(curr->free && curr->size >= size)
    {
-      //hold the size to compare
        h=curr->size;
-       //first value gets stored in y
       if(y==0)
       {
         y = curr->size;
-        //store current block address on temp
         temp = curr;
      }
-     //if y is not 0
     else
     {
-       //compare recent and stored and store the smallest
       if(h < y)
       {
         y =curr->size;
-        //save the address of the smallest block
         temp = curr;
       }
 
     }
  }
- //increment pointer to next block
    curr = curr->next;
 }
-//return the address of block which leaves the least leftover
 curr = temp;
 #endif
 
@@ -134,28 +123,21 @@ struct _block *final = NULL;
 while(curr)
 {
    *last = curr;
-   //if current block is free and size is grater than the requested size, then store it
-   //hold is also zero in the beginnig, so it will store the first free block
    if(hold == 0 && curr->free && curr->size >= size)
    {
-      //store current size and hold current address to return
       hold = curr->size;
       final = curr;
    }
-   //hold is not zero and current block is free
    else
    {
-      //store the free block that gives the most leftover
        if(curr->free && curr->size >= size && hold < curr->size)
       {
          hold = curr->size;
          final = curr;
       }
    }
-   //increment pointer to next block
    curr = curr->next;
 }
-//store the final address to be returned
 curr = final;
 
 
@@ -267,20 +249,13 @@ void *malloc(size_t size)
          //increase blocks and number of splits
          num_splits++;
          num_blocks++;
-         //hold current size
          size_t old_size = c->size;
-         //hold the next address
          struct _block *hold1= c->next;
-         //add header size, current malloced size on the starting address to get to the free address
-         //inside the same block
          uint8_t *ptr =(uint8_t*)c + size + block_size;
          c->next=(struct _block*) ptr;
          c->size = size;
-         //substract malloced and header size to get the new free address
          c->next->size = old_size - size - block_size;
-         //point to the next address
          c->next->next = hold1;
-         //declare the remaining block as free
          c->next->free = true;
 
       }
@@ -320,18 +295,14 @@ void *malloc(size_t size)
 
 void *calloc(size_t nmemb, size_t size)
 {
-   //malloc size * total number
    void *ptr = malloc(nmemb * size);
-   //initialize with zeros
    memset(ptr,0,nmemb * size);
    return ptr;
 }
 
 void *realloc(void *ptr, size_t size)
 {
-   //malloc size
    void *ptr1 = malloc(size);
-   //copy from old to new
    memcpy(ptr1, ptr, size);
    return ptr1;
 }
@@ -357,7 +328,6 @@ void free(void *ptr)
    struct _block *curr = BLOCK_HEADER(ptr);
    assert(curr->free == 0);
    curr->free = true;
-   //count total frees
    num_frees++;
 
    /* TODO: Coalesce free _blocks if needed */
@@ -365,17 +335,12 @@ void free(void *ptr)
    curr = heapList;
    while(curr)
    {
-      //if there is next block free block and curent block is free
       if(curr->next && curr->free && curr->next->free)
       {
-         //increase the value
          num_coalesces++;
          struct _block * old_next;
-         //hold the address pointing by the next block
          old_next = curr->next->next;
-         //add the size to combine
          curr->size = curr->size + curr->next->size + sizeof(struct _block);
-         //now point to next block after combining the free block next to current block
          curr->next = old_next;
 #if 0
          hold = curr->next;
