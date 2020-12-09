@@ -16,9 +16,10 @@
   + Next-Fit: libmalloc-nf.so
   + worst-Fit: libmalloc-wf.so
  ## To run other test cases replace tests/test1 with
- + tests/test2
- + tests/test3
- + tests/test4
+ + To test malloc and free: tests/test1
+ + To test malloc and free: tests/test2
+ + To test coalesce: tests/test3
+ + To test split and reuse: tests/test4
   
 
 
