@@ -13,7 +13,7 @@
 # To Run
 + cd HeapAssignment
 + make
-+ env LD_PRELOAD=lib/libmalloc-ff.so tests/test **override existing malloc by LD_PRELOAD**
++ env LD_PRELOAD=lib/libmalloc-ff.so tests/test (**override existing malloc by LD_PRELOAD**)
 
    ## To run first-fit and next-fit replace libmalloc-ff.so with
    + env LD_PRELOAD=lib/libmalloc-ff.so tests/ffnf
