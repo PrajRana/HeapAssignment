@@ -25,7 +25,7 @@
    + Best-Fit: libmalloc-bf.so
    + worst-Fit: libmalloc-wf.so
   
-  ## To run other test cases replace tests/test1 with
+  ## To run other test cases replace test1 with
   + env LD_PRELOAD=lib/libmalloc-bf.so tests/test1
   + To test malloc and free: tests/test1
   + To test malloc and free: tests/test2
