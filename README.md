@@ -6,7 +6,7 @@
 # Installation
 + git clone https://github.com/PrajRana/HeapAssignment
 
-# to Run
+# To Run
 + cd HeapAssignment
 + make
 + env LD_PRELOAD=lib/libmalloc-ff.so tests/test1  (override existing malloc by LD_PRELOAD)
