@@ -3,6 +3,10 @@
 + Implemeted splitting and coalescing to manage free blocks. 
 + Implemented realloc and calloc
 
+# Prerequisites
++ You will need to have 
+++ VM is recommended
+
 # Installation
 + git clone https://github.com/PrajRana/HeapAssignment
 
