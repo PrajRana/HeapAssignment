@@ -91,29 +91,40 @@ struct _block *findFreeBlock(struct _block **last, size_t size)
 size_t h=0;
 size_t y=0;
 struct _block *temp = NULL;
+//run this loop when curr is not null
 while(curr)
 {
    *last = curr;
+   //if current block is free and current free block is greater than the allocated size
+   //then execute this condition
    if(curr->free && curr->size >= size)
    {
+      //hold the size to compare
        h=curr->size;
+       //first value gets stored in y
       if(y==0)
       {
         y = curr->size;
+        //store current block address on temp
         temp = curr;
      }
+     //if y is not 0
     else
     {
+       //compare recent and stored and store the smallest
       if(h < y)
       {
         y =curr->size;
+        //save the address of the smallest block
         temp = curr;
       }
 
     }
  }
+ //increment pointer to next block
    curr = curr->next;
 }
+//return the address of block which leaves the least leftover
 curr = temp;
 #endif
 
@@ -123,21 +134,28 @@ struct _block *final = NULL;
 while(curr)
 {
    *last = curr;
+   //if current block is free and size is grater than the requested size, then store it
+   //hold is also zero in the beginnig, so it will store the first free block
    if(hold == 0 && curr->free && curr->size >= size)
    {
+      //store current size and hold current address to return
       hold = curr->size;
       final = curr;
    }
+   //hold is not zero and current block is free
    else
    {
+      //store the free block that gives the most leftover
        if(curr->free && curr->size >= size && hold < curr->size)
       {
          hold = curr->size;
          final = curr;
       }
    }
+   //increment pointer to next block
    curr = curr->next;
 }
+//store the final address to be returned
 curr = final;
 
 
@@ -246,7 +264,6 @@ void *malloc(size_t size)
   {
       if((c->size - size) > block_size)
       {
-         //increase blocks and number of splits
          num_splits++;
          num_blocks++;
          size_t old_size = c->size;
@@ -265,9 +282,7 @@ void *malloc(size_t size)
    if (next == NULL)
    {
       next = growHeap(last, size);
-      //add the size to find the max heap
       max_heap = max_heap + next->size;
-      //increase heap grow and number of blocks
       num_grows++;
       num_blocks++;
 
@@ -328,6 +343,7 @@ void free(void *ptr)
    struct _block *curr = BLOCK_HEADER(ptr);
    assert(curr->free == 0);
    curr->free = true;
+   //count total frees
    num_frees++;
 
    /* TODO: Coalesce free _blocks if needed */
@@ -335,6 +351,7 @@ void free(void *ptr)
    curr = heapList;
    while(curr)
    {
+      //if there is next block free block and curent block is free
       if(curr->next && curr->free && curr->next->free)
       {
          num_coalesces++;
