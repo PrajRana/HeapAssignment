@@ -6,10 +6,10 @@
 # Installation
 + git clone https://github.com/PrajRana/HeapAssignment
 
-# To Run
+# to Run
 + cd HeapAssignment
 + make
-+ env LD_PRELOAD=lib/libmalloc-ff.so tests/test1
++ env LD_PRELOAD=lib/libmalloc-ff.so tests/test1 (## override existing malloc by LD_PRELOAD)
 ## To run other heap management schemes replace libmalloc-ff.so with
   + Best-Fit: libmalloc-bf.so
   + First-Fit: libmalloc-ff.so
