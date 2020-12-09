@@ -5,7 +5,7 @@
 
 # Prerequisites
 + You will need to have virtual machine installed on your computer
-  - VM is recommended to run this project
+  - [VM](https://www.virtualbox.org/wiki/Downloads) is recommended to run this project
 
 # Installation
 + git clone https://github.com/PrajRana/HeapAssignment
