@@ -4,8 +4,8 @@
 + Implemented realloc and calloc
 
 # Prerequisites
-+ You will need to have 
-++ VM is recommended
++ You will need to have virtual machine installed on your computer
+- VM is recommended
 
 # Installation
 + git clone https://github.com/PrajRana/HeapAssignment
