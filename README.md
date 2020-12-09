@@ -15,7 +15,7 @@
   + First-Fit: libmalloc-ff.so
   + Next-Fit: libmalloc-nf.so
   + worst-Fit: libmalloc-wf.so
- ## To run other test cases replace test1 with
+ ## To run other test cases replace tests/test1 with
  + tests/test2
  + tests/test3
  + tests/test4
