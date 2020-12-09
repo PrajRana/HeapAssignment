@@ -4,7 +4,8 @@
 + Implemented realloc and calloc
 
 # Installation
-+ git clone
++ git clone https://github.com/PrajRana/HeapAssignment
++ 
 
 
 
